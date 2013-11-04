@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head runat="server">
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Safricom</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="@Href("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+		<link href="@Href("~/Content/Custom/body.css")" rel="stylesheet" type="text/css" />
+		<link href="@Href("~/Content/bootstrap-responsive.min.css")" rel="stylesheet" type="text/css" />
+		<link href="@Href("~/Content/bootstrap-mvc-validation.css")" rel="stylesheet" type="text/css" />
+		<link href="@Href("~/Content/Custom/Custom.css")" rel="stylesheet" type="text/css" />
+        
+		<script src="@Href("~/Scripts/spin.min.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/jquery-1.10.2.min.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/jquery-migrate-1.2.1.min.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+		<script src="@Href("~/scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/modernizr-2.6.2.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/knockout-2.3.0.js")" type="text/javascript"></script>
+		<script src="@Href("~/Scripts/Custom/Custom.js")" type="text/javascript"></script>
+
+		@Html.Partial("_html5shiv")
+
+		<link href="@Href("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+	</head>
+    <body>
+		@Html.Partial("_busyIndicator")
+
+		<header>
+			<nav>
+				<div class="navbar navbar-inverse navbar-fixed-top" id="navBarDiv">
+					<div class="navbar-inner">
+						<div class="container-fluid">
+							<a class="brand" href="@Href("~/")">Safricom</a>
+							<div>
+								<ul class="nav" data-bind="foreach: NavBarLeft">
+									<li data-bind="visible: !DropDown.length, css: {active: $parent.SelectedItemId() == Id}">
+										<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
+											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+										</a>
+										<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
+											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+										</a>
+									</li>
+									<li class="dropdown" data-bind="visible: DropDown.length, css: {active: $parent.SelectedItemId() == Id}">
+										<a class="dropdown-toggle" data-bind="attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
+											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span> <b class="caret"></b></a>
+										<ul class="dropdown-menu pull-right" data-bind="foreach: DropDown">
+											<li>
+												<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
+												<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
+													<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+								<ul class="nav pull-right" data-bind="foreach: NavBarRight">
+									<li data-bind="css: {active: $parent.SelectedItemId() == Id}">
+										<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
+											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+										</a>
+										<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
+											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+										</a>
+									</li>
+								</ul>
+								@*<form class="form-search pull-right" >
+									<div class="input-append" style="padding-top:5px;">
+										<input type="text" class="input-medium search-query">
+										<span class="add-on"><i class="icon-search"></i></span>
+									</div>
+								</form>*@
+							</div>
+						</div>
+					</div>
+				</div>	
+			</nav>
+		</header>
+        <div id="body">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					@*<div id="sideBarDiv" class="span3">
+						<div class="well sidebar-nav">
+							<ul class="nav nav-list" data-bind="foreach: SideBar">
+								<li class="nav-header" data-bind="visible: IsHeader, text: Text"></li>
+								<li data-bind="visible: !IsHeader, css: {active: $parent.SelectedItemId() == Id}">
+									<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
+									<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation, text: Text"></a>
+								</li>
+							</ul>
+						</div> <!--/.well -->
+					</div>*@ <!--/span-->
+					<div id="bodyDiv" class="span9">
+						@RenderBody()
+					</div> <!--/span-->
+				</div> <!--/row-->
+				<hr>
+			</div> <!--/.fluid-container-->
+		</div>
+
+		<footer>
+			<div id="navPillsDiv" class="container-fluid">
+				@*<ul class="nav nav-pills" data-bind="foreach: NavPillsLeft">
+					<li>
+						<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
+							<i data-bind="css: Icon"></i><span data-bind="	text: Text"></span>
+						</a>
+						<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
+							<i data-bind="css: Icon"></i><span data-bind="	text: Text"></span>
+						</a>
+					</li>
+				</ul>
+				<p>&copy; SolutionServer @DateTime.Today.Year</p>*@
+			</div>
+		</footer>
+
+		<div id="AboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h3>About</h3>
+			</div>
+			<div class="modal-body">
+				<h4>Heading 1</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vestibulum tortor iaculis urna eleifend porta.</p>
+				<h4>Heading 2</h4>
+				<p> Nullam in massa erat, venenatis aliquet neque. Etiam id nunc lacinia velit egestas aliquet. Nullam vel leo erat, sed ultrices libero. Nunc blandit semper libero, in accumsan dui aliquet vel. Sed vitae tortor sed ipsum porttitor ultricies a non quam. Fusce tristique venenatis odio, eget hendrerit libero aliquam a. Sed aliquet nulla eu felis consectetur hendrerit. Phasellus eget elementum lacus.</p>
+				<h4>Heading 3</h4>
+				<p> Nullam in massa erat, venenatis aliquet neque. Etiam id nunc lacinia velit egestas aliquet. Nullam vel leo erat, sed ultrices libero. Nunc blandit semper libero, in accumsan dui aliquet vel. Sed vitae tortor sed ipsum porttitor ultricies a non quam. Fusce tristique venenatis odio, eget hendrerit libero aliquam a. Sed aliquet nulla eu felis consectetur hendrerit. Phasellus eget elementum lacus.</p>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+    </body>
+	<script>
+		var layoutModel =
+		{
+			navbarLeft:
+			[
+				{ Id: 1, Text: "Home", Icon: "icon-user", HRef: "@Href("~/")", Role: "", DataToggle: "", DropDown: [] },
+				{ Id: 7, Text: "Clients", Icon: "icon-user", HRef: "@Href("~/Clients/ContactDetails")", Role: "", DataToggle: "", DropDown: [] },
+				{ Id: 3, Text: "Contact Us", Icon: "icon-user", HRef: "@Href("~/Home/Contact/")", Role: "", DataToggle: "", DropDown: [] },
+				@*{
+					Id: 6, Text: "More Menu Items", Icon: "icon-user", HRef: "#", Role: "", DataToggle: "dropdown",
+					DropDown:
+					[
+						{Id: 7, Text: "Client Contact Details", Icon: "icon-user", HRef: "@Href("~/Clients/ContactDetails")", Role: "", DataToggle: ""},
+						{Id: 8, Text: "Menu Item 2", Icon: "icon-user", HRef: "@Href("~/MenuItem2/")", Role: "", DataToggle: ""}
+					]
+				}*@
+			],
+			navbarRight:
+			[
+			],
+			sidebar:
+			[
+				{ Id: 6, Text: "More Menu Items", Icon: "icon-user", HRef: "", Role: "", DataToggle: "", IsHeader: true },
+				{ Id: 7, Text: "Menu Item 1", Icon: "icon-user", HRef: "@Href("~/MenuItem1/")", Role: "", DataToggle: "", IsHeader: false },
+				{ Id: 8, Text: "Menu Item 2", Icon: "icon-user", HRef: "@Href("~/MenuItem2/")", Role: "", DataToggle: "", IsHeader: false },
+				{ Id: 0, Text: "General", Icon: "icon-user", HRef: "", Role: "", DataToggle: "", IsHeader: true },
+				{ Id: 1, Text: "Home", Icon: "icon-user", HRef: "@Href("~/")", Role: "", DataToggle: "", IsHeader: false },
+				{ Id: 2, Text: "About Us", Icon: "icon-user", HRef: "#AboutModal", Role: "button", DataToggle: "modal", IsHeader: false },
+				{ Id: 3, Text: "Contact Us", Icon: "icon-user", HRef: "@Href("~/Home/Contact/")", Role: "", DataToggle: "", IsHeader: false },
+				{ Id: 4, Text: "Register", Icon: "icon-user", HRef: "@Href("~/Account/Register")", Role: "", DataToggle: "", IsHeader: false },
+				{ Id: 5, Text: "Login", Icon: "icon-user", HRef: "@Href("~/Account/Login")", Role: "", DataToggle: "", IsHeader: false }
+			],
+			navPills:
+			[
+				{ Id: 2, Text: "About Us", Icon: "icon-user", HRef: "#AboutModal", Role: "button", DataToggle: "modal", DropDown: [] },
+				{ Id: 4, Text: "Register", Icon: "icon-user", HRef: "@Href("~/Account/Register")", Role: "", DataToggle: "", DropDown: [] },
+				{ Id: 5, Text: "Login", Icon: "icon-user", HRef: "@Href("~/Account/Login")", Role: "", DataToggle: "", DropDown: [] }
+			]
+		};
+
+		var getNav = function(navbarSource, TheItemViewModel)
+		{
+			if (!navbarSource)
+				return [];
+
+			var navbar = [];
+			for (var i = 0; i < navbarSource.length; i++)
+				navbar.push(new TheItemViewModel(navbarSource[i]));
+			return navbar;
+		}
+
+		function ItemViewModel(item)
+		{
+			var self = this;
+			self.Id = item.Id;
+			self.Text = item.Text;
+			self.Icon = item.Icon;
+			self.HRef = item.HRef;
+			self.Role = item.Role;
+			self.DataToggle = item.DataToggle;
+
+			self.IsSelected = ko.observable(false);
+
+			self.GotoLocation = function()
+			{
+				changeLocation(self.HRef);
+			}
+		}
+
+		function NavbarItemViewModel(item)
+		{
+			var self = this;
+			ItemViewModel.apply(self, [ item ]);
+
+			self.DropDown = getNav(item.DropDown, ItemViewModel);
+		}
+
+		function NavBarViewModel()
+		{
+			var self = this;
+			self.NavBarLeft = getNav(layoutModel.navbarLeft, NavbarItemViewModel);
+			self.NavBarRight = getNav(layoutModel.navbarRight, NavbarItemViewModel);
+
+			self.SelectedItemId = ko.observable(0);
+		}
+
+		var navBarViewModel = new NavBarViewModel();
+		ko.applyBindings(navBarViewModel, $("#navBarDiv")[0]);
+
+		function SidebarItemViewModel(item)
+		{
+			var self = this;
+			ItemViewModel.apply(self, [ item ]);
+
+			self.IsHeader = item.IsHeader;
+		}
+
+		function SideBarViewModel()
+		{
+			var self = this;
+			self.SideBar = getNav(layoutModel.sidebar, SidebarItemViewModel);
+
+			self.SelectedItemId = ko.observable(0);
+		}
+
+		var sideBarViewModel = new SideBarViewModel();
+		//ko.applyBindings(sideBarViewModel, $("#sideBarDiv")[0]);
+
+		function NavPillsViewModel()
+		{
+			var self = this;
+			self.NavPillsLeft = getNav(layoutModel.navPills, ItemViewModel);
+		}
+
+		var navPillsViewModel = new NavPillsViewModel();
+		ko.applyBindings(navPillsViewModel, $("#navPillsDiv")[0]);
+	</script>
+	@RenderSection("Scripts", required: false)
+</html>

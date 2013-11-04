@@ -1,0 +1,120 @@
+﻿@model Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+<hgroup class="title">
+    <h1>Register</h1>
+    <h2>Create a new account</h2>
+</hgroup>
+<div class="row-fluid">
+    <div class="span5">
+		<div class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="newFullName">Full Name:</label>
+				<div class="controls"><input class="input-large" id="newFullName" type="text" data-bind="value: fullName" /></div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="newEmail">Email:</label>
+				<div class="controls"><input class="input-large" id="newEmail" type="email" data-bind="value: email" /></div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="Password1">Password:</label>
+				<div class="controls"><input class="input-large" id="Password1" type="password" data-bind="value: password1" /></div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="Password2">Re-enter Password:</label>
+				<div class="controls"><input class="input-large" id="Password2" type="password" data-bind="value: password2" /></div>
+			</div>
+			<div class="control-group">
+				<div class="controls"><button type="button" class="btn btn-primary pull-right" data-bind="click: submitRegistration">Submit</button></div>
+			</div>
+		</div>
+		<div class="alert" data-bind="visible:showMessage, text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>
+	</div>
+
+</div>
+@section Scripts {
+<script>
+	function registerViewModel()
+	{
+ 		fullName = ko.observable("Full name");
+ 		email = ko.observable("2@rt.co.za");
+ 		password1 = ko.observable("123456");
+ 		password2 = ko.observable("123456");
+
+ 		message = ko.observable();
+ 		showMessage = ko.observable(false);
+ 		messageResponse = ko.observable();
+ 		messageOk = ko.observable(true);
+
+ 		submitRegistration = function ()
+ 		{
+ 			showMessage(true);
+ 			if (!fullName() || !email() || !password1() || !password2())
+ 			{
+ 				messageOk(false);
+ 				messageResponse("Please complete all fields");
+ 				return;
+ 			};
+
+ 			if (!IsValidEmailAddress1(email()) || !IsValidEmailAddress2(email()))
+ 			{
+ 				showMessage(true);
+ 				messageOk(false);
+ 				messageResponse("Please enter a valid email address");
+ 				return;
+ 			};
+
+ 			if (password1().length < 6)
+ 			{
+ 				messageOk(false);
+ 				messageResponse("Password should be at least 6 characters long");
+ 				return;
+ 			}
+
+ 			if (password1() != password2())
+ 			{
+ 				messageOk(false);
+ 				password1("");
+ 				password2("");
+ 				messageResponse("Passwords don't match. Please re-enter passwords.");
+ 				return;
+ 			};
+
+			busyViewModel.IsBusy(true);
+ 			$.post("/Account/RegisterNewAccount/", { fullName: fullName(), email: email(), password: password1() },
+					function (response) { handleRegister(response) });
+ 		};
+
+ 		handleRegister = function (registerData)
+ 		{
+ 			/*registerData =
+ 			{
+ 			isOk: false,
+ 			errorMessage: "TO DO"
+ 			};*/
+
+ 			if (!registerData.isOk)
+ 			{
+ 				messageOk(false);
+ 				messageResponse(registerData.errorMessage);
+ 				busyViewModel.IsBusy(false);
+ 				return;
+ 			}
+
+ 			messageOk(true);
+ 			messageResponse("Registration completed");
+ 			changeLocation("@Href("~/")");
+ 		};
+	};
+
+	ko.applyBindings(registerViewModel(), document.getElementById("bodyDiv"));
+	
+	$(document).ready(function ()
+	{
+		navBarViewModel.SelectedItemId(4); //Register
+		sideBarViewModel.SelectedItemId(4); //Register
+		busyViewModel.IsBusy(false);
+	});
+</script>
+}
