@@ -34,25 +34,25 @@
 				<div class="navbar navbar-inverse navbar-fixed-top" id="navBarDiv">
 					<div class="navbar-inner">
 						<div class="container-fluid">
-							<a class="brand" href="@Href("~/")">Safricom</a>
+							@*<a class="brand" href="@Href("~/")">Safricom</a>*@
 							<div>
 								<ul class="nav" data-bind="foreach: NavBarLeft">
 									<li data-bind="visible: !DropDown.length, css: {active: $parent.SelectedItemId() == Id}">
 										<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
-											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+											<i data-bind="css: Icon"></i> <span data-bind=" text: Text"></span>
 										</a>
 										<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
-											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+											<i data-bind="css: Icon"></i> <span data-bind=" text: Text"></span>
 										</a>
 									</li>
 									<li class="dropdown" data-bind="visible: DropDown.length, css: {active: $parent.SelectedItemId() == Id}">
 										<a class="dropdown-toggle" data-bind="attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
-											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span> <b class="caret"></b></a>
+											<i data-bind="css: Icon"></i> <span data-bind=" text: Text"></span> <b class="caret"></b></a>
 										<ul class="dropdown-menu pull-right" data-bind="foreach: DropDown">
 											<li>
 												<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
 												<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
-													<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+													<i data-bind="css: Icon"></i> <span data-bind=" text: Text"></span>
 												</a>
 											</li>
 										</ul>
@@ -61,25 +61,26 @@
 								<ul class="nav pull-right" data-bind="foreach: NavBarRight">
 									<li data-bind="css: {active: $parent.SelectedItemId() == Id}">
 										<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
-											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+											<i data-bind="css: Icon"></i> <span data-bind=" text: Text"></span>
 										</a>
 										<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
-											<i data-bind="css: Icon"></i><span data-bind=" text: Text"></span>
+											<i data-bind="css: Icon"></i> <span data-bind=" text: Text"></span>
 										</a>
 									</li>
 								</ul>
-								@*<form class="form-search pull-right" >
+								<form class="form-search pull-right" style="margin-bottom:0px;">
 									<div class="input-append" style="padding-top:5px;">
-										<input type="text" class="input-medium search-query">
-										<span class="add-on"><i class="icon-search"></i></span>
+										<input type="text" class="input-medium search-query" placeholder="Search" style="outline: none; padding-left: 10px">
+										<span class="add-on" style="border-top-right-radius:14px; border-bottom-right-radius:14px"><i class="icon-search"></i></span>
 									</div>
-								</form>*@
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>	
 			</nav>
 		</header>
+
         <div id="body">
 			<div class="container-fluid">
 				<div class="row-fluid">
@@ -103,18 +104,23 @@
 		</div>
 
 		<footer>
-			<div id="navPillsDiv" class="container-fluid">
-				@*<ul class="nav nav-pills" data-bind="foreach: NavPillsLeft">
-					<li>
-						<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
-							<i data-bind="css: Icon"></i><span data-bind="	text: Text"></span>
-						</a>
-						<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
-							<i data-bind="css: Icon"></i><span data-bind="	text: Text"></span>
-						</a>
-					</li>
-				</ul>
-				<p>&copy; SolutionServer @DateTime.Today.Year</p>*@
+			<div id="navPillsDiv" class="navbar navbar-inverse navbar-fixed-bottom">
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<a class="brand" href="@Href("~/")">Safricom</a>
+				
+						<ul class="nav nav-pills pull-right" data-bind="foreach: NavPillsLeft">
+							<li data-bind="css: { active: $parent.SelectedItemId() == Id }">
+								<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
+									<i data-bind="css: Icon"></i> <span data-bind="	text: Text"></span>
+								</a>
+								<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
+									<i data-bind="css: Icon"></i> <span data-bind="	text: Text"></span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</footer>
 
@@ -140,9 +146,9 @@
 		{
 			navbarLeft:
 			[
-				{ Id: 1, Text: "Home", Icon: "icon-user", HRef: "@Href("~/")", Role: "", DataToggle: "", DropDown: [] },
+				{ Id: 1, Text: "Home", Icon: "icon-home", HRef: "@Href("~/")", Role: "", DataToggle: "", DropDown: [] },
 				{ Id: 7, Text: "Clients", Icon: "icon-user", HRef: "@Href("~/Clients/ContactDetails")", Role: "", DataToggle: "", DropDown: [] },
-				{ Id: 3, Text: "Contact Us", Icon: "icon-user", HRef: "@Href("~/Home/Contact/")", Role: "", DataToggle: "", DropDown: [] },
+				{ Id: 3, Text: "Contact Us", Icon: "icon-envelope", HRef: "@Href("~/Home/Contact/")", Role: "", DataToggle: "", DropDown: [] },
 				@*{
 					Id: 6, Text: "More Menu Items", Icon: "icon-user", HRef: "#", Role: "", DataToggle: "dropdown",
 					DropDown:
@@ -169,8 +175,8 @@
 			],
 			navPills:
 			[
-				{ Id: 2, Text: "About Us", Icon: "icon-user", HRef: "#AboutModal", Role: "button", DataToggle: "modal", DropDown: [] },
-				{ Id: 4, Text: "Register", Icon: "icon-user", HRef: "@Href("~/Account/Register")", Role: "", DataToggle: "", DropDown: [] },
+				{ Id: 2, Text: "About Us", Icon: "icon-info-sign", HRef: "#AboutModal", Role: "button", DataToggle: "modal", DropDown: [] },
+				{ Id: 4, Text: "Register", Icon: "icon-edit", HRef: "@Href("~/Account/Register")", Role: "", DataToggle: "", DropDown: [] },
 				{ Id: 5, Text: "Login", Icon: "icon-user", HRef: "@Href("~/Account/Login")", Role: "", DataToggle: "", DropDown: [] }
 			]
 		};
@@ -247,10 +253,22 @@
 		{
 			var self = this;
 			self.NavPillsLeft = getNav(layoutModel.navPills, ItemViewModel);
+
+			self.SelectedItemId = ko.observable(0);
 		}
 
 		var navPillsViewModel = new NavPillsViewModel();
 		ko.applyBindings(navPillsViewModel, $("#navPillsDiv")[0]);
+
+		finishLayout = function (selectedItemId)
+		{
+			navBarViewModel.SelectedItemId(selectedItemId);
+			sideBarViewModel.SelectedItemId(selectedItemId);
+			navPillsViewModel.SelectedItemId(selectedItemId);
+			busyViewModel.IsBusy(false);
+		}
+
+		$(".nav li").hover(function () { $("i", this).addClass("icon-white"); }, function () { $("i", this).removeClass("icon-white"); });
 	</script>
 	@RenderSection("Scripts", required: false)
 </html>
