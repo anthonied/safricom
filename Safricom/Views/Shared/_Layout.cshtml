@@ -68,9 +68,9 @@
 										</a>
 									</li>
 								</ul>
-								<form class="form-search pull-right" style="margin-bottom:0px;">
-									<div class="input-append" style="padding-top:5px;">
-										<input type="text" class="input-medium search-query" placeholder="Search" style="outline: none; padding-left: 10px">
+								<form class="form-search pull-right">
+									<div class="input-append">
+										<input type="text" class="input-medium search-query" placeholder="Search" >
 										<button type="button" class="btn"><i class="icon-search"></i></button>
 									</div>
 								</form>
@@ -117,10 +117,10 @@
 						<ul class="nav nav-pills pull-right" data-bind="foreach: NavPillsLeft">
 							<li data-bind="css: { active: $parent.SelectedItemId() == Id }">
 								<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}">
-									<i data-bind="css: Icon"></i> <span data-bind="	text: Text"></span>
+									<i data-bind="css: Icon" style="margin-top:0px;"></i> <span data-bind="	text: Text"></span>
 								</a>
 								<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: GotoLocation">
-									<i data-bind="css: Icon"></i> <span data-bind="	text: Text"></span>
+									<i data-bind="css: Icon" style="margin-top:0px;"></i> <span data-bind="	text: Text"></span>
 								</a>
 							</li>
 						</ul>

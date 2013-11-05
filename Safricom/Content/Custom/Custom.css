@@ -6,6 +6,13 @@
 	border:0px solid red;
 }
 
+#contactTabs .nav.nav-tabs
+{
+	margin-bottom:0px;
+	border-bottom:0px;
+}
+
+
 #contactTabsContent.tab-content
 {
 	background-color:#f7f7f9;
@@ -43,3 +50,15 @@
 {
 	background-color: lightgrey;
 }
+
+/*search box in navbar*/
+	.navbar-inner .form-search{
+
+		margin-bottom:0px;
+		padding-top:5px;
+	}
+
+	.navbar-inner .form-search input{
+		outline: none;
+		padding-left: 10px;
+	}
