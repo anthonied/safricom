@@ -71,7 +71,7 @@
 								<form class="form-search pull-right" style="margin-bottom:0px;">
 									<div class="input-append" style="padding-top:5px;">
 										<input type="text" class="input-medium search-query" placeholder="Search" style="outline: none; padding-left: 10px">
-										<span class="add-on" style="border-top-right-radius:14px; border-bottom-right-radius:14px"><i class="icon-search"></i></span>
+										<button type="button" class="btn"><i class="icon-search"></i></button>
 									</div>
 								</form>
 							</div>
@@ -105,9 +105,14 @@
 
 		<footer>
 			<div id="navPillsDiv" class="navbar navbar-inverse navbar-fixed-bottom">
+				<div id="chatBoxStartup" class="input-append" data-toggle="tooltip" title="Question? Chat with us!<br />We're currently online." style="position: absolute; bottom: 35px; left: 5px">
+					<input type="text" class="input-medium" placeholder="Type here to start new chat" style="outline: none; padding-right: 10px; border-color: green">
+					<button type="button" class="btn" style="background-color: lightgreen; border-color: green"><i class="icon-envelope"></i></button>
+				</div>
+				<button id="feedback"  type="button" class="btn btn-info" data-toggle="tooltip" title="Please help us in improving this product." style="position: absolute; bottom: 45px; right: 5px"><i class="icon-envelope icon-white"></i> Feedback</button>
 				<div class="navbar-inner">
-					<div class="container-fluid">
-						<a class="brand" href="@Href("~/")">Safricom</a>
+					<div class="container-fluid" style="background-color: #4D4D4D">
+						<a class="brand" href="@Href("~/")" style="font-size:45px">Safricom</a>
 				
 						<ul class="nav nav-pills pull-right" data-bind="foreach: NavPillsLeft">
 							<li data-bind="css: { active: $parent.SelectedItemId() == Id }">
@@ -148,8 +153,8 @@
 			[
 				{ Id: 1, Text: "Home", Icon: "icon-home", HRef: "@Href("~/")", Role: "", DataToggle: "", DropDown: [] },
 				{ Id: 7, Text: "Clients", Icon: "icon-user", HRef: "@Href("~/Clients/ContactDetails")", Role: "", DataToggle: "", DropDown: [] },
-				{ Id: 3, Text: "Contact Us", Icon: "icon-envelope", HRef: "@Href("~/Home/Contact/")", Role: "", DataToggle: "", DropDown: [] },
-				@*{
+				@*{ Id: 3, Text: "Contact Us", Icon: "icon-envelope", HRef: "@Href("~/Home/Contact/")", Role: "", DataToggle: "", DropDown: [] },
+				{
 					Id: 6, Text: "More Menu Items", Icon: "icon-user", HRef: "#", Role: "", DataToggle: "dropdown",
 					DropDown:
 					[
@@ -269,6 +274,8 @@
 		}
 
 		$(".nav li").hover(function () { $("i", this).addClass("icon-white"); }, function () { $("i", this).removeClass("icon-white"); });
+		$("#chatBoxStartup").tooltip({ animation: true, html: true, placement: 'top', });
+		$("#feedback").tooltip({ animation: true, html: true, placement: 'top', });
 	</script>
 	@RenderSection("Scripts", required: false)
 </html>
