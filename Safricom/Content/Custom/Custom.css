@@ -59,6 +59,9 @@
 	}
 
 	.navbar-inner .form-search input{
-		outline: none;
 		padding-left: 10px;
+	}
+
+	.navbar-inner .form-search input:focus{
+		outline: none;
 	}
