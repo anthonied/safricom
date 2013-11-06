@@ -366,7 +366,16 @@
     <Content Include="Views\JavascriptTests\_ViewStart.cshtml" />
     <Content Include="Views\Clients\ContactDetails.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Safricom.Data\Safricom.Data.csproj">
+      <Project>{96566add-5d55-4819-98db-72b33c74eafa}</Project>
+      <Name>Safricom.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Safricom.Domain\Safricom.Domain.csproj">
+      <Project>{c39a9709-807c-4322-a851-cb7b3c937313}</Project>
+      <Name>Safricom.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
