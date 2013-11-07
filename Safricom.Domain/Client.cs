@@ -12,7 +12,7 @@ namespace Safricom.Domain
         {
             get
             {
-                return Name.Substring(0, 3).ToUpper() + Surname.Substring(0, 3).ToUpper() + IdPassport.Substring(0, 3);
+                return Name.Substring(0, 2).ToUpper() + Surname.Substring(0, 2).ToUpper() + IdPassport.Substring(0, 2);
             }
         }
         public string Name { get; set; }
@@ -22,7 +22,21 @@ namespace Safricom.Domain
         public string Telephone { get; set; }
         public string Email { get; set; }
         public string IdPassport { get; set; }
-        public string VatNumber { get; set; }
+        private string _vatNumber = "0";
+        public string VatNumber
+        {
+            get
+            {
+                return _vatNumber;
+            }
+            set
+            {
+                if (value == "")
+                    _vatNumber = "0";
+                else
+                    _vatNumber = value;
+            }
+        }
         public Address InstallationAddress { get; set; }
         public Address PhysicalAddress { get; set; }
         public Address PostalAddress { get; set; }

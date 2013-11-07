@@ -154,7 +154,7 @@ namespace Safricom.Data
                                && clt.id_passport == client.IdPassport
                                select clt).ToList();
 
-                return clients.Count > 0 ? true : false;
+                return clients.Count > 0;
             }
         }
 

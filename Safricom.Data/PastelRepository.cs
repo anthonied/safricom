@@ -14,20 +14,20 @@ namespace Safricom.Data
         {
             using (PsqlConnection pastelConnection = new PsqlConnection(Connect.sPastelConnStr))
             {
-                string sqlPastel = customerMasterSQL(newClient);
+                string sqlPastel = createCustomerMasterSQL(newClient);
                 executePastelQuery(pastelConnection, sqlPastel);
                 
             }
 
             using (PsqlConnection liquidConnection = new PsqlConnection(Connect.sConnStr))
             {
-                var sqlLiquid = liquidCnSQL(newClient);
+                var sqlLiquid = createLiquidCNSQL(newClient);
                 executeLiquidQuery(liquidConnection, sqlLiquid);
                 
             }
         }
 
-        private string liquidCnSQL(Client newClient)
+        private string createLiquidCNSQL(Client newClient)
         {
             var sqlLiquid = @"
                 INSERT into SOLCN
@@ -43,7 +43,19 @@ namespace Safricom.Data
                 ";
             return sqlLiquid;
         }
-        private string customerMasterSQL(Client newClient)
+
+        private string updateLiquidCNSQL(Client newClient)
+        {
+            var sqlLiquid = @"
+                UPDATE SOLCN
+                SET
+                        IDNumber = '" + newClient.IdPassport + @"'
+                WHERE 
+                        CustomerCode = '" + newClient.CustomerCode + @"'
+                ";
+            return sqlLiquid;
+        }
+        private string createCustomerMasterSQL(Client newClient)
         {
             var sql = @"
                 INSERT into CustomerMaster
@@ -76,12 +88,49 @@ namespace Safricom.Data
 
         public void UpdateClient(Client newClient)
         {
-            throw new NotImplementedException();
+            using (PsqlConnection pastelConnection = new PsqlConnection(Connect.sPastelConnStr))
+            {
+                string sqlPastel = updateCustomerMasterSQL(newClient);
+                executePastelQuery(pastelConnection, sqlPastel);
+
+            }
+
+            using (PsqlConnection liquidConnection = new PsqlConnection(Connect.sConnStr))
+            {
+                var sqlLiquid = updateLiquidCNSQL(newClient);
+                executeLiquidQuery(liquidConnection, sqlLiquid);
+
+            }
+
         }
 
+        private string updateCustomerMasterSQL(Client newClient)
+        {
+            var sql = @"
+                    UPDATE CustomerMaster 
+                    SET
+                            CustomerDesc = '" + newClient.Name + " " + newClient.Surname + @"',
+                            PostAddress01 = '" + newClient.PostalAddress.StreetNumber + @"',
+                            PostAddress02 = '" + newClient.PostalAddress.Street + @"',
+                            PostAddress03 = '" + newClient.PostalAddress.PoBox + @"',
+                            PostAddress04 = '" + newClient.PostalAddress.PostalCode + @"',
+                            PostAddress05 = '" + newClient.PostalAddress.City + @"',
+                            TaxCode = " + newClient.VatNumber + @",
+                            CreateDate = '" + DateTime.Now.ToString("yyyy-MM-dd") + @"'
+                    WHERE 
+                            CustomerCode = '" + newClient.CustomerCode + @"'
+                ";
+            return sql;
+        }
         public bool CheckIfClientExists(Client client)
         {
-            return false;
+            using (PsqlConnection pastelConnection = new PsqlConnection(Connect.sPastelConnStr))
+            {
+                string sqlPastel = String.Format("SELECT COUNT(*) FROM CustomerMaster WHERE CustomerMaster.CustomerCode = '{0}'", client.CustomerCode);
+                int count = (int)Connect.getDataCommand(sqlPastel, pastelConnection).ExecuteScalar();
+                
+                return count > 0;
+            }
         }
         private void executePastelQuery(PsqlConnection pastelConnection, string sqlPastel)
         {
@@ -89,7 +138,7 @@ namespace Safricom.Data
             {
                 Connect.getDataCommand(sqlPastel, pastelConnection).ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }

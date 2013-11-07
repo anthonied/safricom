@@ -1,13 +1,17 @@
-﻿using Safricom.Domain;
+﻿using log4net;
+using Safricom.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Safricom.Data
 {
     public class ClientRepository
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         Client _selectedClient;
 
         SqlRepository _sqlRepository = new SqlRepository();
@@ -15,6 +19,7 @@ namespace Safricom.Data
 
         public void InsertClient(Client newClient)
         {
+            _log.Info(String.Format("Managing client: {0} {1}", newClient.Name, newClient.Surname));
             _selectedClient = newClient;
             insertToSql();
             insertToPastel();

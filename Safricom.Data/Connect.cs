@@ -9,8 +9,8 @@ namespace Safricom.Data.Domain
 {
     public class Connect
     {
-        public static string sConnStr = "Server Name=Phillip-Laptop;Database Name=LFAIRIEGLEN;Uid=;Pwd=;";
-        public static string sPastelConnStr = "Server Name=Phillip-Laptop;Database Name=PFAIRIEGLEN;Uid=;Pwd=;";
+        public static string sConnStr = "Server Name=Phillip-Laptop;Database Name=LSAFRICOM;Uid=;Pwd=;";
+        public static string sPastelConnStr = "Server Name=Phillip-Laptop;Database Name=PSAFRICOM;Uid=;Pwd=;";
         public static PsqlCommand getDataCommand(string sSQL, PsqlConnection conn)
         {
             try
