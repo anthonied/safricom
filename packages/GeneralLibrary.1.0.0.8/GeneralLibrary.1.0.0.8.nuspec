@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>GeneralLibrary</id>
+    <version>1.0.0.8</version>
+    <title>General .Net 4.0 Library</title>
+    <authors>Solution Server</authors>
+    <owners>Solution Server</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .Net 4.0 library with some useful methods and extensions</description>
+    <releaseNotes>Version 1.0.0.8 (2013-03-12)
+			===============
+
+			String Extensions - TrimIfNotNull
+			-	Returns null if a string is the null value
+			-	If a string is not the null value, it removes all leading and trailing white space characters like: space, line feed (\n), carriage return (\r), tab (\t), vertical tab (\v), ...
+
+
+			Version 1.0.0.7 (2012-09-07)
+			===============
+
+			String Extensions - CompareTo
+			-	Compares this instance with specified string
+			-	Optional ignore case parameter
+
+			String Extensions - IsEqualTo
+			-	Determines whether this instance and another specified string have the same value
+			-	Optional ignore case parameter
+
+			String Extensions - FormatWith
+			-	Replaces the format item in a specified composite format string with the string representation of a corresponding object in a specified array
+
+
+			Version 1.0.0.6 (2012-09-04)
+			===============
+
+			String Extensions - IsNullOrEmpty
+			-	Checks if a string is the null value or empty ("")
+
+			String Extensions - IsNullOrWhiteSpace
+			-	Checks if a string is the null value, empty ("") or contains only white space characters like: space, line feed (\n), carriage return (\r), tab (\t), vertical tab (\v), ...
+
+
+			Version 1.0.0.5 (2012-09-03)
+			===============
+
+			DateTime Extensions - SetTime
+			-	Sets the time component
+
+			TimeSpan Extensions - ToDateTime
+			-	Converts to DateTime using a given date as start date
+			-	Uses today's date as start date if no date was given</releaseNotes>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.0" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

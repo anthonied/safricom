@@ -1,0 +1,105 @@
+﻿@model Models.LoginModel
+@{
+    ViewBag.Title = "Log in";
+}
+<hgroup class="title">
+    <h2>Log in</h2>
+</hgroup>
+<div id="contactTabsContent" class="tab-content">
+	<div id="Tab1" class="tab-pane active">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span6">
+					<form>
+<div class="row-fluid">
+    <div class="span5">
+		<div class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="emailId">Email:</label>
+				<div class="controls"><input class="input-large" id="emailId" type="email" data-bind="value: email" /></div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="passwordId">Password:</label>
+				<div class="controls"><input class="input-large" id="passwordId" type="password" data-bind="value: password" /></div>
+			</div>
+				
+			<div class="control-group">
+				<div class="controls"><button type="button" class="btn btn-success pull-right" data-bind="click:submitLogin">Login</button></div>
+			</div>
+		</div>
+		<div class="alert" data-bind="visible:showMessage, text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>
+	</div>
+</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@section Scripts {
+<script>
+	function loginViewModel()
+	{
+   		fullName = ko.observable("");
+   		email = ko.observable("");
+   		password = ko.observable("");
+
+   		showMessage = ko.observable(false);
+   		messageOk = ko.observable();
+   		messageResponse = ko.observable();
+
+   		submitLogin = function ()
+   		{
+   			showMessage(true);
+
+   			if (!fullName() || !email() || !password())
+   			{
+   				messageOk(false);
+   				messageResponse("Please complete all fields");
+   				return;
+   			};
+
+   			if (!IsValidEmailAddress1(email()) || !IsValidEmailAddress2(email()))
+   			{
+   				showMessage(true);
+   				messageOk(false);
+   				messageResponse("Please enter a valid email address");
+   				return;
+   			};
+
+   			busyViewModel.IsBusy(true);
+   			$.post("/Account/CheckLogin/", { fullName: fullName(), email: email(), password: password() },
+					function (loginDetails) { handleLogin(loginDetails) });
+   		};
+
+   		function handleLogin(loginDetails)
+   		{
+   			/*loginDetails =
+			{ isOk: false,
+				errorMessage: "Cannot be logged in"
+			};*/
+
+   			if (!loginDetails.isOk)
+   			{
+   				messageOk(false);
+   				messageResponse(loginDetails.errorMessage);
+   				busyViewModel.IsBusy(false);
+   				return;
+   			};
+
+   			messageOk(true);
+
+   			messageResponse("You are now logged in");
+			changeLocation("@Href("~/")");
+   		};
+
+	};
+
+	ko.applyBindings(new loginViewModel(), document.getElementById('bodyDiv'));
+
+	$(document).ready(function ()
+	{
+		finishLayout(5); //Login
+	});
+</script>
+}

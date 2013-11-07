@@ -1,0 +1,67 @@
+﻿body {
+}
+
+.span7,.span6, .span5, .span4, .span3, .span2, .span1
+{
+	border:0px solid red;
+}
+
+#contactTabs .nav.nav-tabs
+{
+	margin-bottom:0px;
+	border-bottom:0px;
+}
+
+
+#contactTabsContent.tab-content
+{
+	background-color:#f7f7f9;
+	margin-top:0px;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:0px;
+	border-radius:5px;
+	border:1px solid #DDDDDD;
+	
+}
+
+.nav.nav-tabs a:focus
+{
+	outline:0px;
+	
+}
+
+.nav.nav-tabs .active a, .nav.nav-tabs .active a:focus
+{
+	background-color:#f7f7f9;
+}
+
+.nav li i
+{
+	margin-top: -1px;
+}
+
+.nav li.active i, .nav li:hover i
+{
+	margin-top: 0px;
+}
+
+.nav li.active a
+{
+	background-color: lightgrey;
+}
+
+/*search box in navbar*/
+	.navbar-inner .form-search{
+
+		margin-bottom:0px;
+		padding-top:5px;
+	}
+
+	.navbar-inner .form-search input{
+		padding-left: 10px;
+	}
+
+	.navbar-inner .form-search input:focus{
+		outline: none;
+	}
