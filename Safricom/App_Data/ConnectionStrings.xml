@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <connectionStrings>
 	<add name="DefaultConnection" connectionString="Data Source=(local);Initial Catalog=Safricom;Integrated Security=SSPI" providerName="System.Data.SqlClient" />
+    <add name="safricomContainer" connectionString="metadata=res://*/safricom.csdl|res://*/safricom.ssdl|res://*/safricom.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=PHILLIP-LAPTOP;initial catalog=safricom;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
 </connectionStrings>
