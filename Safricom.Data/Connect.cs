@@ -1,6 +1,7 @@
 ﻿using Pervasive.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace Safricom.Data.Domain
 {
     public class Connect
     {
-        public static string sConnStr = "Server Name=Phillip-Laptop;Database Name=LSAFRICOM;Uid=;Pwd=;";
-        public static string sPastelConnStr = "Server Name=Phillip-Laptop;Database Name=PSAFRICOM;Uid=;Pwd=;";
+        public static string sConnStr = ConfigurationManager.AppSettings["LPastelConnection"];
+        public static string sPastelConnStr = ConfigurationManager.AppSettings["PPastelConnection"];
         public static PsqlCommand getDataCommand(string sSQL, PsqlConnection conn)
         {
             try

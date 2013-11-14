@@ -14,16 +14,17 @@ namespace Safricom
 
 	public class MvcApplication : System.Web.HttpApplication
 	{
-		protected void Application_Start()
-		{
-			AreaRegistration.RegisterAllAreas();
-
-			WebApiConfig.Register(GlobalConfiguration.Configuration);
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-			RouteConfig.RegisterRoutes(RouteTable.Routes);
-			BundleConfig.RegisterBundles(BundleTable.Bundles);
-			AuthConfig.RegisterAuth();
-			BootstrapSupport.BootstrapBundleConfig.RegisterBundles(System.Web.Optimization.BundleTable.Bundles);
-		}
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AuthConfig.RegisterAuth();
+            BootstrapSupport.BootstrapBundleConfig.RegisterBundles(System.Web.Optimization.BundleTable.Bundles);
+            System.IO.FileInfo newFileInfo = new System.IO.FileInfo("C:\\LogConfigs\\Safricom.config");
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(newFileInfo);
+        }
 	}
 }

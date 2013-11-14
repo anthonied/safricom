@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a00ff0f866b4780ab16fd1feb471cdc" Name="Diagram1" ZoomLevel="86" >
-        <EntityTypeShape EntityType="safricom.clientaddress" Width="1.5" PointX="10.944220086068018" PointY="18.442866557483963" />
-        <EntityTypeShape EntityType="safricom.client" Width="1.5" PointX="8.75632051599972" PointY="14.307851887451417" />
+      <Diagram DiagramId="e121eaac6d0849dab0095f8989ab84ae" Name="Diagram1">
+        <EntityTypeShape EntityType="safricomModel.clientaddress" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="safricomModel.client" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

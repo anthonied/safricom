@@ -11,5 +11,6 @@ namespace Safricom.Data
         void CreateClient(Client newClient);
         void UpdateClient(Client newClient);
         bool CheckIfClientExists(Client client);
+        void CreateOrUpdateClient(Client client);
     }
 }

@@ -20,7 +20,7 @@ namespace Safricom.Tests
                 IdPassport = "8505085082089"
             };
 
-            Assert.That(client.CustomerCode, Is.EqualTo("PHKE85"));		
+            Assert.That(client.UserName, Is.EqualTo("PHKE85"));		
         }
 
         [Test]
@@ -51,6 +51,24 @@ namespace Safricom.Tests
             };
 
             Assert.That(client.VatNumber, Is.EqualTo("123"));
+        }
+        [Test]
+        public void Client_GivenNoPassword_ShouldReturnDummyPassword()
+        {
+            var client = new Client()
+            {
+                Password = string.Empty
+            };
+            Assert.That(client.Password, Is.EqualTo("DUMMY"));
+        }
+        [Test]
+        public void Client_GivenPassword_ShouldReturnPassword()
+        {
+            var client = new Client()
+            {
+                Password = "Gert"
+            };
+            Assert.That(client.Password, Is.EqualTo("Gert"));
         }
     }
 }
