@@ -3,12 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safricom", "Safricom\Safricom.csproj", "{9186CE7D-CC43-4F36-894D-9F3F970BF3C1}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safricom.Data", "Safricom.Data\Safricom.Data.csproj", "{96566ADD-5D55-4819-98DB-72B33C74EAFA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safricom.Domain", "Safricom.Domain\Safricom.Domain.csproj", "{C39A9709-807C-4322-A851-CB7B3C937313}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safricom.Tests", "Safricom.Tests\Safricom.Tests.csproj", "{9EB4AFD4-A5C9-43A1-9E23-049571AE5D75}"
 EndProject
+=======
+>>>>>>> develop
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +22,7 @@ Global
 		{9186CE7D-CC43-4F36-894D-9F3F970BF3C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9186CE7D-CC43-4F36-894D-9F3F970BF3C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9186CE7D-CC43-4F36-894D-9F3F970BF3C1}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{96566ADD-5D55-4819-98DB-72B33C74EAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96566ADD-5D55-4819-98DB-72B33C74EAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96566ADD-5D55-4819-98DB-72B33C74EAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,6 +35,8 @@ Global
 		{9EB4AFD4-A5C9-43A1-9E23-049571AE5D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EB4AFD4-A5C9-43A1-9E23-049571AE5D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EB4AFD4-A5C9-43A1-9E23-049571AE5D75}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+>>>>>>> develop
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
