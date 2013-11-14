@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <connectionStrings>
 	<add name="DefaultConnection" connectionString="Data Source=(local);Initial Catalog=Safricom;Integrated Security=SSPI" providerName="System.Data.SqlClient" />
-    <add name="safricomContainer" connectionString="metadata=res://*/safricom.csdl|res://*/safricom.ssdl|res://*/safricom.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=PHILLIP-LAPTOP;initial catalog=safricom;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+  <add name="radiusEntities" connectionString="metadata=res://*/radius.csdl|res://*/radius.ssdl|res://*/radius.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;server=10.0.0.3;user id=admin;password=p@ssword!!;persist security info=True;database=radius&quot;" providerName="System.Data.EntityClient" />
+  <add name="safricomEntities" connectionString="metadata=res://*/safricom.csdl|res://*/safricom.ssdl|res://*/safricom.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=safricom;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
 </connectionStrings>

@@ -5,4 +5,9 @@
 	<add key="PreserveLoginUrl" value="true" />
 	<add key="ClientValidationEnabled" value="true" />
 	<add key="UnobtrusiveJavaScriptEnabled" value="true" />
+  <add key="UseMSSqlRepo" value="true" />
+  <add key="UsePastelRepo" value="true" />
+  <add key="UseRadiusRepo" value="true" />
+  <add key="PPastelConnection" value="Server Name=Phillip-Laptop;Database Name=PSAFRICOM;Uid=;Pwd=;" />
+  <add key="LPastelConnection" value="Server Name=Phillip-Laptop;Database Name=LSAFRICOM;Uid=;Pwd=;" />
 </appSettings>

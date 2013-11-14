@@ -13,10 +13,10 @@ namespace Safricom.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class safricomContainer : DbContext
+    public partial class safricomEntities : DbContext
     {
-        public safricomContainer()
-            : base("name=safricomContainer")
+        public safricomEntities()
+            : base("name=safricomEntities")
         {
         }
     

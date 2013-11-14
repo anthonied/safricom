@@ -7,12 +7,27 @@ namespace Safricom.Domain
 {
     public class Client
     {
-
-        public string CustomerCode
+        public Client()
+        {
+            Password = string.Empty;
+        }
+        public string UserName
         {
             get
             {
                 return Name.Substring(0, 2).ToUpper() + Surname.Substring(0, 2).ToUpper() + IdPassport.Substring(0, 2);
+            }
+        }
+        private string _password;
+        public string Password 
+        {
+            get { return _password; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                    _password = "DUMMY";
+                else
+                    _password = value;
             }
         }
         public string Name { get; set; }

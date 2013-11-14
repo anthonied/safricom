@@ -1,29 +1,39 @@
-﻿using Pervasive.Data.SqlClient;
+﻿using log4net;
+using Pervasive.Data.SqlClient;
 using Safricom.Data.Domain;
 using Safricom.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Safricom.Data
 {
     public class PastelRepository: IClientRepository
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public void CreateOrUpdateClient(Client newClient)
+        {
+            if (CheckIfClientExists(newClient))
+                UpdateClient(newClient);
+            else
+                CreateClient(newClient);
+        }
+
         public void CreateClient(Client newClient)
         {
             using (PsqlConnection pastelConnection = new PsqlConnection(Connect.sPastelConnStr))
             {
                 string sqlPastel = createCustomerMasterSQL(newClient);
                 executePastelQuery(pastelConnection, sqlPastel);
-                
             }
 
             using (PsqlConnection liquidConnection = new PsqlConnection(Connect.sConnStr))
             {
                 var sqlLiquid = createLiquidCNSQL(newClient);
                 executeLiquidQuery(liquidConnection, sqlLiquid);
-                
             }
         }
 
@@ -38,7 +48,7 @@ namespace Safricom.Data
                 VALUES
                     (
                         '" + newClient.IdPassport + @"',
-                        '" + newClient.CustomerCode + @"'
+                        '" + newClient.UserName + @"'
                     )
                 ";
             return sqlLiquid;
@@ -51,7 +61,7 @@ namespace Safricom.Data
                 SET
                         IDNumber = '" + newClient.IdPassport + @"'
                 WHERE 
-                        CustomerCode = '" + newClient.CustomerCode + @"'
+                        CustomerCode = '" + newClient.UserName + @"'
                 ";
             return sqlLiquid;
         }
@@ -72,7 +82,7 @@ namespace Safricom.Data
                     )
                 VALUES
                     (
-                        '" + newClient.CustomerCode + @"',
+                        '" + newClient.UserName + @"',
                         '" + newClient.Name + " " + newClient.Surname + @"',
                         '" + newClient.PostalAddress.StreetNumber + @"',
                         '" + newClient.PostalAddress.Street + @"',
@@ -92,14 +102,12 @@ namespace Safricom.Data
             {
                 string sqlPastel = updateCustomerMasterSQL(newClient);
                 executePastelQuery(pastelConnection, sqlPastel);
-
             }
 
             using (PsqlConnection liquidConnection = new PsqlConnection(Connect.sConnStr))
             {
                 var sqlLiquid = updateLiquidCNSQL(newClient);
                 executeLiquidQuery(liquidConnection, sqlLiquid);
-
             }
 
         }
@@ -118,7 +126,7 @@ namespace Safricom.Data
                             TaxCode = " + newClient.VatNumber + @",
                             CreateDate = '" + DateTime.Now.ToString("yyyy-MM-dd") + @"'
                     WHERE 
-                            CustomerCode = '" + newClient.CustomerCode + @"'
+                            CustomerCode = '" + newClient.UserName + @"'
                 ";
             return sql;
         }
@@ -126,7 +134,7 @@ namespace Safricom.Data
         {
             using (PsqlConnection pastelConnection = new PsqlConnection(Connect.sPastelConnStr))
             {
-                string sqlPastel = String.Format("SELECT COUNT(*) FROM CustomerMaster WHERE CustomerMaster.CustomerCode = '{0}'", client.CustomerCode);
+                string sqlPastel = String.Format("SELECT COUNT(*) FROM CustomerMaster WHERE CustomerMaster.CustomerCode = '{0}'", client.UserName);
                 int count = (int)Connect.getDataCommand(sqlPastel, pastelConnection).ExecuteScalar();
                 
                 return count > 0;
@@ -137,10 +145,11 @@ namespace Safricom.Data
             try
             {
                 Connect.getDataCommand(sqlPastel, pastelConnection).ExecuteNonQuery();
+                _log.Debug(String.Format("Successfully executed query '{0}'", sqlPastel));
             }
             catch (Exception ex)
             {
-
+                _log.Error(String.Format("Could not execute pastel query '{0}'", sqlPastel), ex);
             }
         }
         private void executeLiquidQuery(PsqlConnection liquidConnection, string sqlLiquid)
@@ -148,10 +157,11 @@ namespace Safricom.Data
             try
             {
                 Connect.getDataCommand(sqlLiquid, liquidConnection).ExecuteNonQuery();
+                _log.Debug(String.Format("Successfully executed query '{0}'", sqlLiquid));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _log.Error(String.Format("Could not execute liquid query '{0}'", sqlLiquid), ex);
             }
         }
     }

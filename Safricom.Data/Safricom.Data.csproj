@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Interop.PasSDK">
       <HintPath>..\packages\Interop.PasSDK.dll</HintPath>
@@ -41,6 +45,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.8.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="Pervasive.Data.SqlClient">
       <HintPath>..\packages\Pervasive.Data.SqlClient.dll</HintPath>
     </Reference>
@@ -48,8 +60,9 @@
       <HintPath>..\packages\Solsage Pastel API.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -71,6 +84,44 @@
     <Compile Include="PastelRepository.cs" />
     <Compile Include="PersistanceMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="radacct.cs">
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radcheck.cs">
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radgroupcheck.cs">
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radgroupreply.cs">
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radius.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>radius.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radius.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radius.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>radius.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="RadiusRepository.cs" />
+    <Compile Include="MSSqlRepository.cs" />
+    <Compile Include="radpostauth.cs">
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radreply.cs">
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
+    <Compile Include="radusergroup.cs">
+      <DependentUpon>radius.tt</DependentUpon>
+    </Compile>
     <Compile Include="safricom.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,17 +137,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>safricom.edmx</DependentUpon>
     </Compile>
-    <Compile Include="SqlRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="safricom.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>safricom.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="safricom.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>safricom.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="radius.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>radius.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="radius.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>radius.edmx</DependentUpon>
+      <LastGenOutput>radius.Context.cs</LastGenOutput>
+    </None>
+    <None Include="radius.edmx.diagram">
+      <DependentUpon>radius.edmx</DependentUpon>
+    </None>
+    <None Include="radius.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>radius.edmx</DependentUpon>
+      <LastGenOutput>radius.cs</LastGenOutput>
+    </None>
     <None Include="safricom.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>safricom.edmx</DependentUpon>
@@ -113,9 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="safricom.edmx.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Safricom.Domain\Safricom.Domain.csproj">

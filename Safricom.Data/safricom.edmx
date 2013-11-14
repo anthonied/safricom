@@ -4,10 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="safricom.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="safricomStoreContainer">
-          <EntitySet Name="clientaddress" EntityType="safricom.Store.clientaddress" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="clients" EntityType="safricom.Store.clients" store:Type="Tables" Schema="dbo" />
+      <Schema Namespace="safricomModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="safricomModelStoreContainer">
+          <EntitySet Name="clientaddress" EntityType="safricomModel.Store.clientaddress" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="clients" EntityType="safricomModel.Store.clients" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="clientaddress">
           <Key>
@@ -38,100 +38,101 @@
           <Property Name="id_passport" Type="nvarchar" MaxLength="50" />
           <Property Name="vat_registration" Type="nvarchar" MaxLength="50" />
         </EntityType>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="safricom" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" >
-        <EntityContainer Name="safricomContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="clientaddresses" EntityType="safricom.clientaddress" />
-          <EntitySet Name="clients" EntityType="safricom.client" />
+      <Schema Namespace="safricomModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="safricomEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clientaddresses" EntityType="safricomModel.clientaddress" />
+          <EntitySet Name="clients" EntityType="safricomModel.client" />
         </EntityContainer>
         <EntityType Name="clientaddress">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="street_number" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="street" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="city" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="suburb" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="gps_coordinates" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="post_box" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="postal_code" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="type" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="client_id" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="street_number" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="street" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="city" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="suburb" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="gps_coordinates" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="post_box" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="postal_code" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="client_id" Type="Int32" />
         </EntityType>
         <EntityType Name="client">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="surname" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="business_name" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="cell_phone_one" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="telephone_work" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="email" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="id_passport" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="vat_registration" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="surname" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="business_name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="cell_phone_one" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="telephone_work" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="id_passport" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="vat_registration" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="safricomStoreContainer" CdmEntityContainer="safricomContainer">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="safricomModelStoreContainer" CdmEntityContainer="safricomEntities">
           <EntitySetMapping Name="clientaddresses">
-            <EntityTypeMapping TypeName="safricom.clientaddress">
+            <EntityTypeMapping TypeName="safricomModel.clientaddress">
               <MappingFragment StoreEntitySet="clientaddress">
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="post_box" ColumnName="post_box" />
-                <ScalarProperty Name="gps_coordinates" ColumnName="gps_coordinates" />
-                <ScalarProperty Name="suburb" ColumnName="suburb" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="street_number" ColumnName="street_number" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="street_number" ColumnName="street_number" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="suburb" ColumnName="suburb" />
+                <ScalarProperty Name="gps_coordinates" ColumnName="gps_coordinates" />
+                <ScalarProperty Name="post_box" ColumnName="post_box" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="clients">
-            <EntityTypeMapping TypeName="safricom.client">
+            <EntityTypeMapping TypeName="safricomModel.client">
               <MappingFragment StoreEntitySet="clients">
-                <ScalarProperty Name="vat_registration" ColumnName="vat_registration" />
-                <ScalarProperty Name="id_passport" ColumnName="id_passport" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="telephone_work" ColumnName="telephone_work" />
-                <ScalarProperty Name="cell_phone_one" ColumnName="cell_phone_one" />
-                <ScalarProperty Name="business_name" ColumnName="business_name" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="business_name" ColumnName="business_name" />
+                <ScalarProperty Name="cell_phone_one" ColumnName="cell_phone_one" />
+                <ScalarProperty Name="telephone_work" ColumnName="telephone_work" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_passport" ColumnName="id_passport" />
+                <ScalarProperty Name="vat_registration" ColumnName="vat_registration" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
-    <edmx:Connection>
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
       </DesignerInfoPropertySet>
-    </edmx:Connection>
-    <edmx:Options>
+    </Connection>
+    <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
-    </edmx:Options>
+    </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <edmx:Diagrams>
-    </edmx:Diagrams>
-  </edmx:Designer>
+    <Diagrams></Diagrams>
+  </Designer>
 </edmx:Edmx>

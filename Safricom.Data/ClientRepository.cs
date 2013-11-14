@@ -2,6 +2,7 @@
 using Safricom.Domain;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,63 +12,47 @@ namespace Safricom.Data
     public class ClientRepository
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        List<IClientRepository> _repositories = new List<IClientRepository>();
+        private bool MsSqlRepoShouldRun
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings.AllKeys.Contains("UseMSSqlRepo")
+                                && ConfigurationManager.AppSettings["UseMSSqlRepo"] == "true";
+            }
+        }
+        private bool PastelRepoShouldRun
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings.AllKeys.Contains("UsePastelRepo")
+                                && ConfigurationManager.AppSettings["UsePastelRepo"] == "true";
+            }
+        }
+        private bool RadiusRepoShouldRun
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings.AllKeys.Contains("UseRadiusRepo")
+                                && ConfigurationManager.AppSettings["UseRadiusRepo"] == "true";
+            }
+        }
 
-        Client _selectedClient;
-
-        SqlRepository _sqlRepository = new SqlRepository();
-        PastelRepository _pastelRepository = new PastelRepository();
+        public ClientRepository()
+        {
+            if (RadiusRepoShouldRun)
+                _repositories.Add(new RadiusRepository());
+            if (MsSqlRepoShouldRun)
+                _repositories.Add(new MSSqlRepository());
+            if (PastelRepoShouldRun)
+                _repositories.Add(new PastelRepository());
+        }
 
         public void InsertClient(Client newClient)
         {
             _log.Info(String.Format("Managing client: {0} {1}", newClient.Name, newClient.Surname));
-            _selectedClient = newClient;
-            insertToSql();
-            insertToPastel();
-        }
-
-        private void insertToSql()
-        {
-            if (CheckIfClientExistsInSQL())
-                UpdateSqlClient();
-            else
-                CreateSqlClient();
-        }
-
-        public void CreateSqlClient()
-        {
-            _sqlRepository.CreateClient(_selectedClient);
-        }
-
-        public void UpdateSqlClient()
-        {
-            _sqlRepository.UpdateClient(_selectedClient);
-        }
-     
-        public bool CheckIfClientExistsInSQL()
-        {
-            return _sqlRepository.CheckIfClientExists(_selectedClient);
-        }
-
-        private bool CheckIfClientExistsInPastel()
-        {
-            return _pastelRepository.CheckIfClientExists(_selectedClient);
-        }
-
-        private void insertToPastel()
-        {
-            if (CheckIfClientExistsInPastel())
-                UpdatePastelClient();
-            else
-                CreatePastelClient();
-        }
-
-        private void CreatePastelClient()
-        {
-            _pastelRepository.CreateClient(_selectedClient);
-        }
-        private void UpdatePastelClient()
-        {
-            _pastelRepository.UpdateClient(_selectedClient);
+            foreach (var repo in _repositories)
+                repo.CreateOrUpdateClient(newClient);
         }
     }
 }
